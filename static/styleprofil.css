@@ -1,0 +1,270 @@
+body {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.banderoleG {
+  width: 8.5%;
+  height: 14vh;
+  background-color: black;
+}
+
+.banderoleD {
+  width: 8.5%;
+  height: 14vh;
+  background-color: black;
+}
+
+.banderoleT {
+  width: 17%;
+  height: 14vh;
+  background-color: black;
+  padding-top: 3vh;
+  text-align: center;
+  color: white;
+  font-size: 4vh;
+  text-decoration: none;
+}
+
+.banderoleB {
+  width: 51%;
+  height: 14vh;
+  background-color: black;
+  padding-top: 3vh;
+  text-align: center;
+  color: white;
+  font-size: 4vh;
+  text-decoration: none;
+}
+
+.banderoleV {
+  width: 17%;
+  height: 14vh;
+  animation: wheelHueColor 2s infinite;
+  background-color: currentColor;
+
+}
+
+.imgVip {
+  padding-top: 3vh;
+  width: 5rem;
+  height: 5rem;
+}
+
+.text {
+  text-align: center;
+  margin-left: 7vh;
+  color: white;
+  font-size: 4vh;
+  padding-top: 3vh;
+}
+
+#searchbar {
+  border: 0;
+  width: 60%;
+  padding: 2vh;
+  border-radius: 1vh;
+  background-color: white;
+}
+
+.search {
+  border-width: 0;
+  padding: 2vh;
+  background-color: black;
+  border-radius: 1vh;
+  color: white;
+  border-width: 2px;
+  border-color: black;
+}
+
+.search:hover {
+  border-width: 2px;
+  border-color: white;
+}
+
+
+@keyframes wheelHueColor {
+
+  from,
+  to {
+    color: rgb(255, 236, 125)
+  }
+
+  14% {
+    color: rgb(255, 231, 94)
+  }
+
+  28% {
+    color: rgb(254, 225, 59)
+  }
+
+  42% {
+    color: rgb(255, 215, 0)
+  }
+
+  56% {
+    color: rgb(254, 225, 59)
+  }
+
+  70% {
+    color: rgb(255, 231, 94)
+  }
+
+  84% {
+    color: rgb(255, 236, 125)
+  }
+}
+
+.pierre3 {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  height: 180px;
+  background-color: black;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.pierre {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 15px;
+  left: 25px;
+}
+
+.pierre2 {
+  color: white;
+  margin-left: 1.5em;
+  font-size: 1.5em;
+}
+
+/* Style the tab */
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  /* border: 1px solid #ccc; */
+  background-color: #151728;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: #151728;
+  
+  color:white;
+  margin-left: 5%;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 1em
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #fff;
+  color:#151728;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #fff;
+  color:#151728;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  
+}
+
+.tabcontent {
+  animation: fadeEffect 1s;
+  /* Fading effect takes 1 second */
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.disconnect {
+  position:relative;
+  font-size: 1em;
+
+  color: red;
+}
+
+.titre {
+  font-size: 2em;
+  
+  margin-left: 5%;
+  
+}
+
+.top {
+  margin-left: 10%;
+  font-size: 1.5em;
+  margin-top: 30px;
+}
+
+.texte{
+  margin-left: 17%;
+  font-size:1em;
+  border: 1px solid black;
+  width:70%;
+  padding:12px;
+  background-color: rgb(221, 220, 220);
+  border-radius:4px;
+  
+}
+
+.texte-min{
+  margin-left: 17%;
+  font-size:1em;
+  border: 1px solid black;
+  width:15%;
+  padding:12px;
+  background-color: rgb(221, 220, 220);
+  border-radius:4px;
+  text-align: center;
+}
+
+.form input{
+  display: block;
+    margin-bottom: 10px;
+}
+
+.rep {
+  border: 1px solid black;
+    margin-top: 5px;
+    margin-left: 17%;
+    border-radius : 2px;
+    padding: 10px;
+    transition: all 0.5s ease;
+}
+
+.rep:focus{
+  background-color: lightgrey;
+    color: black; 
+}
+
+.form input[type=submit]:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+}

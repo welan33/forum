@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>^w^</title>
+
+    <link href="/static/styleprofil.css" rel="stylesheet" media="all" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <script src="/static/profil.js"></script>
+</head>
+
+<body>
+    <nav class="navbar is-dark is-spaced" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <strong>TEAMJBZZ</strong>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <div style="padding-left: 1vh;">
+                    <input class="input is-dark" style="width: 50vh;" type="text"
+                        placeholder="Chercher un thread ou un utilisateur">
+                </div>
+                <div style="padding-left: 1vh;">
+                    <button class="button is-dark">Chercher</button>
+                </div>
+                <a href="/poste">
+                    <button class="button is-dark">Poster un thread</button>
+                </a>
+                {{ if ne .Rank 3}}
+                <form action="/admin" method="POST">
+                    <button type="submit" class="button">Devenir admin</button>
+                    <input name="username" type="hidden" value={{ .Username }}>
+                </form>
+                {{ end }}
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    {{ if eq .Logged false }}
+                    <div class="buttons">
+                        <a class="button is-primary" href="/co">
+                            <strong>Login or Sign up</strong>
+                        </a>
+                    </div>
+                    {{ else }}
+                    <div class="buttons">
+                        <a class="button is-dark" href="profil/{{ .Username }}">
+                            <strong>Profil</strong>
+                        </a>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="box">
+        <div class="level-left">
+            {{ if eq .Image "" }}
+            <figure class="image is-128x128">
+                <img src="../assets/profil.png" class="is-rounded"></img>
+            </figure>
+            {{ else }}
+            <figure class="image is-128x128">
+                <img src="{{ .Image }}" class="is-rounded is-fullwidth"></img>
+            </figure>
+            {{ end }}
+            <div class="content">
+                <p>
+                    <strong style="padding-left: 5vh;">{{ .Username }}</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box">
+        <button class="button is-primary is-light" onclick="openCity(event, 'Profil')" id="defaultOpen">Profil</button>
+        <button class="button is-primary is-light" onclick="openCity(event, 'Paris')">Posts</button>
+        {{ if eq .Logged true }}
+        <button class="button is-primary is-light" onclick="openCity(event, 'Tokyo')">Paramètres</button>
+        {{ if eq .Rank 2 }}
+        <button class="button is-primary is-light" onclick="openCity(event, 'Modo')">Modération</button>
+        {{ end }}
+        {{ if eq .Rank 3 }}
+        <button class="button is-primary is-light" onclick="openCity(event, 'Admin')">Administration</button>
+        {{ end }}
+        <a href="/logout"><button class="button is-danger" style="float: right;">Se déconnecter</button></a>
+        {{ end }}
+    </div>
+
+    <!-- Tab content -->
+    <div id="Profil" class="tabcontent">
+        <div class="field">
+            <div class="control" style="width: 20%;">
+                <div class="content"> 
+                    <strong style="font-size: 3vh;">Username :</strong>
+                    <br>
+                    <div style="padding-left: 2vh; text-decoration : underline;">{{ .Username }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control" style="width: 40%;">
+                <div class="content"> 
+                    <strong style="font-size: 3vh;">Email :</strong>
+                    <br>
+                    <div style="padding-left: 2vh; text-decoration : underline;">{{ .Email }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control" style="width: 40%;">
+                <div class="content">
+                    <strong style="font-size: 3vh;">Rank :</strong>
+                    {{ if eq .Rank 0}}
+                    <div style="padding-left: 2vh; text-decoration : underline;">Membre</div>
+                    {{ end }}
+                    {{ if eq .Rank 1}}
+                    <div style="padding-left: 2vh; text-decoration : underline;">VIP</div>
+                    {{ end }}
+                    {{ if eq .Rank 2}}
+                    <div style="padding-left: 2vh; text-decoration : underline;">Modérateur</div>
+                    {{ end }}
+                    {{ if eq .Rank 3}}
+                    <div style="padding-left: 2vh; text-decoration : underline;">Administrateur</div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control" style="width: 40%;">
+                <div class="content"> 
+                <strong style="font-size: 3vh;">Description :</strong> 
+                </br>
+                <div style="padding-left: 2vh;">{{.Description }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Paris" class="tabcontent">
+             {{ range .Value }}
+             {{ if eq .Logged true }}
+                <article class="message is-dark">
+                    <div class="message-header">
+                        <a href="/page/{{ .Id }}"> {{ .Title }} </a> 
+                        {{ .Category }}
+                        {{ if eq .Logged true }}
+                        <a href="/delete/{{.Id}}" style="text-decoration: none;">
+                        <button type="button" class="button is-small is-dark">🗑</button>
+                        </a>
+                        {{ else }}
+                        <a href="/profil/{{ .Username }}" style="text-decoration: none;">De: {{ .Username }}</a>
+                        {{ end }}
+                    </div>
+                    <div class="message-body">
+                        {{ .Content_sum }}
+                        </br>
+                        </br>
+                        <div class="is-italic"> le {{ .Publication_d }}</div>
+                        Score : {{ .Score }}
+                        </br>
+                        <a href="/page/{{ .Id }}" style="text-decoration: none;">
+                        <button type="submit" class="button">Accéder au poste</button>
+                        </a>
+                        <a href="/dislike/{{.Id}}" style="text-decoration: none;">
+                            <button type="button" class="button is-rounded" style="float: right;">👎</button>
+                        </a>
+                        <a href="/like/{{.Id}}" style="text-decoration: none;">
+                        <button type="button" class="button is-rounded" style="float: right;">👍</button>
+                        </a>
+                    </div>
+                  </article>
+                    </br>
+                    {{ end }}
+                {{ end }}
+    </div>
+    <div id="Tokyo" class="tabcontent">
+            <form action="/EditProfil" class="form" method="POST" style="padding-left: 3vh;">
+                <div class="field">
+                    <div class="control" style="width: 20%;">
+                <p > Nom d'utilisateur </p>
+                <input type="text" class="input" value="{{ .Username }}" name="username" />
+            </div>
+                <div class="field">
+                    <div class="control" style="width: 40%;">
+                <p > Image de profil </p>
+                <input type="text" class="input" value="{{ .Image }}" name="image" />
+            </div>
+        </div>
+                <div class="field">
+                    <div class="control" style="width: 40%;">
+                <p > Email </p>
+                <input type="email" class="input" value="{{ .Email }}" name="email" />
+            </div>
+        </div>
+                <div class="field">
+                    <div class="control" style="width: 40%;">
+                <p > Description </p>
+                <textarea class="textarea" name="description"
+                style="position:relative; width: 50%; height: 200px; resize: none;">{{ .Description }}</textarea>
+            </div>
+        </div>
+                <div class="field">
+                    <div class="control">
+                        <button type="submit" class="button">Envoyer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+        
+    <div id="Admin" class="tabcontent">
+            <div class="content">
+                <div class="field">
+                    <div class="control">
+                <h1>Panel Administrateur</h1>
+                    </div>
+                </div>
+                <div>Gestion des utilisateurs</div>
+                <div>Gestion des catégories</div>
+                <div>Modération</div>
+                <form action="/admin-p/{{ .Username }}" method="POST">
+                    <button type="submit" class="button">Panel Admin</button>
+                </form>
+        </div>
+    </div>
+
+    <div id="Modo" class="tabcontent">
+            <div class="content">
+                <div class="field">
+                    <div class="control">
+                <h1>Panel Modérateur</h1>
+                    </div>
+                </div>
+                <div>Modération</div>
+                <form action="/request" method="POST">
+                    <button type="submit" class="button">Requête pour l'admin</button>
+                    <input name="username" type="hidden" value={{ .Username }}>
+                </form>
+            </div>
+        </div>
+    <script>openCity(event, 'Profil')</script>
+</body>
+
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+            // Add a click event on each of them
+            $navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+        }
+
+    });
+</script>

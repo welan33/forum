@@ -1,0 +1,238 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.flex {
+    display: flex;
+}
+
+.banderoleG {
+    width: 8.5%;
+    height: 14vh;
+    background-color: black;
+}
+
+.banderoleD {
+    width: 8.5%;
+    height: 14vh;
+    background-color: black;
+}
+
+.banderoleT {
+    width: 17%;
+    height: 14vh;
+    background-color: black;
+    padding-top: 3vh;
+    text-align: center;
+    color: white;
+    font-size: 4vh;
+    text-decoration: none;
+}
+
+.banderoleB {
+    width: 51%;
+    height: 14vh;
+    background-color: black;
+    padding-top: 3vh;
+    text-align: center;
+    color: white;
+    font-size: 4vh;
+    text-decoration: none;
+}
+
+.banderoleV {
+    width: 17%;
+    height: 14vh;
+    animation: wheelHueColor 2s infinite;
+    background-color: currentColor;
+
+}
+
+.imgProfil {
+    border-radius: 50%;
+    margin-left: 7%;
+    margin-top: 3%;
+    max-width: 83%;
+    height: auto;
+}
+
+.imgCle {
+    margin-top: 3%;
+    margin-left: 6%;
+}
+
+.imgVip {
+    padding-top: 3.5vh;
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+}
+.text {
+    text-align: center;
+    margin-left: 10vh;
+    color: white;
+    font-size: 4vh;
+    padding-top: 3vh;
+}
+
+#searchbar {
+    border: 0;
+    width: 60%;
+    padding: 2vh;
+    border-radius: 1vh;
+    background-color: white;
+}
+
+.search {
+    border-width: 0;
+    padding: 2vh;
+    background-color: black;
+    border-radius: 1vh;
+    color: white;
+    border-width: 2px;
+    border-color: black;
+}
+
+.search:hover {
+    border-width: 2px;
+    border-color: white;
+}
+
+
+@keyframes wheelHueColor {
+
+    from,
+    to {
+        color: rgb(255, 236, 125)
+    }
+
+    14% {
+        color: rgb(255, 231, 94)
+    }
+
+    28% {
+        color: rgb(254, 225, 59)
+    }
+
+    42% {
+        color: rgb(255, 215, 0)
+    }
+
+    56% {
+        color: rgb(254, 225, 59)
+    }
+
+    70% {
+        color: rgb(255, 231, 94)
+    }
+
+    84% {
+        color: rgb(255, 236, 125)
+    }
+}
+
+.flexButton {
+    display: flex;
+    padding-right: 3rem;
+    justify-content: right;
+}
+
+.creerThread {
+    height: 4rem;
+    width: 13rem;
+    color: white;
+    background-color: black;
+    border-radius: 15px;
+}
+
+.creerThread:hover {
+    animation: rainbow 5s linear infinite alternate;
+    background-color: currentColor;
+}
+
+.flexThread {
+    display: flex;
+}
+
+.espace {
+    width: 8.5%;
+}
+
+.threadP {
+    width: 42.25%;
+    border-width: 1vh;
+    height: 60vh;
+    overflow: scroll;
+}
+
+.titreP {
+    width: 37.25%;
+    text-align: center;
+    font-size: 3vh;
+    padding-bottom: 1vh;
+}
+
+.threadB {
+    overflow: scroll;
+    width: 32.25%;
+    border-width: 1vh;
+    height: 60vh;
+}
+
+.titreB {
+    width: 37.25%;
+    text-align: center;
+    font-size: 3vh;
+    padding-bottom: 1vh;
+    animation: wheelHueColor 2s infinite;
+    color: currentColor;
+}
+
+.titreR {
+    width: 18%;
+    text-align: center;
+    font-size: 3vh;
+}
+
+.mt {
+    margin-top: 5vh;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+@keyframes rainbow {
+    0% {
+        background-color: purple;
+        left: 0px;
+        top: 0px;
+    }
+
+    25% {
+        background-color: blue;
+        left: 200px;
+        top: 0px;
+    }
+
+    50% {
+        background-color: green;
+        left: 200px;
+        top: 200px;
+    }
+
+    75% {
+        background-color: rgb(170, 170, 6);
+        left: 0px;
+        top: 200px;
+    }
+
+    100% {
+        background-color: rgb(151, 0, 0);
+        left: 0px;
+        top: 0px;
+    }
+}

@@ -1,0 +1,139 @@
+body {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.flex {
+  display: flex;
+}
+
+.banderoleG {
+  width: 8.5%;
+  height: 14vh;
+  background-color: black;
+}
+
+.banderoleD {
+  width: 8.5%;
+  height: 14vh;
+  background-color: black;
+}
+
+.banderoleT {
+  width: 17%;
+  height: 14vh;
+  background-color: black;
+  padding-top: 3vh;
+  text-align: center;
+  color: white;
+  font-size: 4vh;
+  text-decoration: none;
+}
+
+.banderoleB {
+  width: 51%;
+  height: 14vh;
+  background-color: black;
+  padding-top: 3vh;
+  text-align: center;
+  color: white;
+  font-size: 4vh;
+  text-decoration: none;
+}
+
+.banderoleV {
+  width: 17%;
+  height: 14vh;
+  animation: wheelHueColor 2s infinite;
+  background-color: currentColor;
+}
+
+.imgVip {
+  padding-top: 3.5vh;
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+}
+
+.text {
+  text-align: center;
+  margin-left: 10vh;
+  color: white;
+  font-size: 4vh;
+  padding-top: 3vh;
+}
+
+#searchbar {
+  border: 0;
+  width: 60%;
+  padding: 2vh;
+  border-radius: 1vh;
+  background-color: white;
+}
+
+.search {
+  border-width: 0;
+  padding: 2vh;
+  background-color: black;
+  border-radius: 1vh;
+  color: white;
+  border-width: 2px;
+  border-color: black;
+}
+
+.search:hover {
+  border-width: 2px;
+  border-color: white;
+}
+
+@keyframes wheelHueColor {
+  from,
+  to {
+    color: rgb(255, 236, 125);
+  }
+
+  14% {
+    color: rgb(255, 231, 94);
+  }
+
+  28% {
+    color: rgb(254, 225, 59);
+  }
+
+  42% {
+    color: rgb(255, 215, 0);
+  }
+
+  56% {
+    color: rgb(254, 225, 59);
+  }
+
+  70% {
+    color: rgb(255, 231, 94);
+  }
+
+  84% {
+    color: rgb(255, 236, 125);
+  }
+}
+
+.marge {
+  padding-left: 6vh;
+}
+
+.titre{
+  font-size: 3vh;
+  color: blue;
+}
+
+.flexTitre{
+  display: flex;
+  justify-content: space-between;
+}
+
+.categorie{
+  font-size: 3vh;
+  padding-right: 6vh;
+}

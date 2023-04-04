@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>^w^</title>
+    <link href="./static/style.css" rel="stylesheet" media="all" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+</head>
+
+<body>
+    <nav class="navbar is-dark is-spaced" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <strong>TEAMJBZZ</strong>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <div style="padding-left: 1vh;">
+                    <input class="input is-dark" style="width: 50vh;" type="text"
+                        placeholder="Chercher un thread ou un utilisateur">
+                </div>
+                <div style="padding-left: 1vh;">
+                    <button class="button is-dark">Chercher</button>
+                </div>
+                <a href="/poste">
+                    <button class="button is-dark">Poster un thread</button>
+                </a>
+                <form action="/" method="post" autocomplete="off">
+                    <div class="dropdown is-hoverable">
+                        <div class="dropdown-trigger">
+                            <button class="button is-dark" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <span>Filtres</span>
+                                <span class="icon is-small">
+                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div class="dropdown-content is-dark" style="background-color: hsl(0, 0%, 21%);">
+                                <div style="padding: 1vh;">
+                                    <div class="control">
+                                        <input type="checkbox" id="like" name="like" value="like">
+                                        <label for="like" style="color: white">Tri par like</label>
+                                    </div>
+                                    <div class="control">
+                                        <input type="checkbox" id="old" name="old" value="old">
+                                        <label for="old" style="color: white;">Tri par ancienneté</label>
+                                    </div>
+                                    <label for="cat-select" class="label" style="color: white;">Choisissez une
+                                        catégorie</label>
+                                    <div class="control">
+                                        <div class="select">
+                                            <select name="cat" id="cat-select"
+                                                style="background-color: hsl(0, 0%, 21%); color: white; border-color: hsl(0, 0%, 21%);">
+                                                <option value="" style="color: white;">--Sélectionnez une catégorie--
+                                                </option>
+                                                {{ range .Categories}}
+                                                <option value="{{ .Name }}" style="color: white">{{ .Name }}</option>
+                                                {{ end }}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control">
+                                        <button type="submit" class="button"
+                                            style="width: 100%; background-color: hsl(0, 0%, 21%); color: white; border-color: hsl(0, 0%, 21%);">Appliquer
+                                            les filtres</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <a href="/vip-p">
+                    <button class="button is-dark">VIP</button>
+                </a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    {{ if eq .Logged false }}
+                    <div class="buttons">
+                        <a class="button is-primary" href="/co">
+                            <strong>S'inscrire ou se connecter</strong>
+                        </a>
+                    </div>
+                    {{ else }}
+                    <div class="buttons">
+                        <a class="button is-dark" href="profil/{{ .Username }}">
+                            <strong>Profil</strong>
+                        </a>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="mt"></div>
+    <div class="flexThread">
+        <div class="espace"></div>
+        <div class="titreP">Threads Principaux</div>
+        <div class="espace"></div>
+        <div class="titreB">Threads Boostés</div>
+        <div class="espaces"></div>
+    </div>
+    <div class="flexThread">
+        <div class="espace"></div>
+        <div class="threadP">
+            {{ range .Value }}
+            <article class="message is-dark">
+                <div class="message-header">
+                    <a href="/page/{{ .Id }}"> {{ .Title }} </a>
+                    {{ .Category }}
+                    {{ if eq .Logged true }}
+                    <a href="/delete/{{.Id}}" style="text-decoration: none;">
+                    <button type="button" class="button is-small is-dark">🗑</button>
+                    </a>
+                    {{ else }}
+                    <a href="/profil/{{ .Username }}" style="text-decoration: none;">De: {{ .Username }}</a>
+                    {{ end }}
+                </div>
+                    <div class="message-body">
+                        {{ .Content_sum }}
+                        </br>
+                        </br>
+                        <div class="is-italic"> le {{ .Publication_d }}</div>
+                        Score : {{ .Score }}
+                        </br>
+                        <a href="/page/{{ .Id }}" style="text-decoration: none;">
+                        <button type="submit" class="button">Accéder au poste</button>
+                        </a>
+                        <a href="/dislike/{{.Id}}" style="text-decoration: none;">
+                            <button type="button" class="button is-rounded" style="float: right;">👎</button>
+                        </a>
+                        <a href="/like/{{.Id}}" style="text-decoration: none;">
+                        <button type="button" class="button is-rounded" style="float: right;">👍</button>
+                        </a>
+                    </div>
+                  </article>
+                    </br>
+                {{ end }}
+            </div>
+            <div class="espace"></div>
+            <div class="threadB">
+                ouais la moulaga
+                sheeeeeesh
+            </div>
+            <div class="espace"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+            // Add a click event on each of them
+            $navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+        }
+
+    });
+</script>

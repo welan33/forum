@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>^w^</title>
+        <link href="../static/style.css" rel="stylesheet" media="all" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="shortcut icon" href="/assets/favicon.ico">
+    </head>
+    <body>
+        <nav class="navbar is-dark is-spaced" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                <strong>TEAMJBZZ</strong>
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <div style="padding-left: 1vh;">
+                        <input class="input is-dark" style="width: 50vh;" type="text" placeholder="Chercher un thread ou un utilisateur">
+                    </div>
+                        <div style="padding-left: 1vh;">
+                            <button class="button is-dark">Chercher</button>
+                        </div>
+                    <a href="/poste">
+                    <button class="button is-dark">Poster un thread</button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <div style="padding-top: 3vh;"></div>
+        <div class="flexThread">
+            <div class="espace"></div>
+            <div class="threadP">
+                <strong>Gestion des Utilisateurs</strong>
+                {{ range .UserList}}
+                <article class="message is-dark">
+                    <div class="message-header"> 
+                        {{ .Username }} 
+                        <div style="padding-left: 3vh;">actuel : {{ .Rank }}</div>
+                    </div>
+                    <div class="message-body"> 
+                            {{ if ne .Rank 3}}
+                            <form action="/admin" method="POST">
+                                <button type="submit" class="button">Changer en admin</button>
+                                <input name="username" type="hidden" value="{{ .Username }}">
+                            </form>
+                            {{ end }}
+                            {{ if ne .Rank 2}}
+                            <form action="/mod" method="POST">
+                                <button type="submit" class="button">Changer en modérateur</button>
+                                <input name="username" type="hidden" value="{{ .Username }}">
+                            </form>
+                            {{ end }}
+                            {{ if ne .Rank 1}}
+                            <form action="/vip" method="POST">
+                                <button type="submit" class="button">Changer en VIP</button>
+                                <input name="username" type="hidden" value="{{ .Username }}">
+                            </form>
+                            {{ end }}
+                            {{ if ne .Rank 0}}
+                            <form action="/reset" method="POST">
+                                <button type="submit" class="button">Changer en membre</button>
+                                <input name="username" type="hidden" value="{{ .Username }}">
+                            </form>
+                            <form action="/delete-u/{{ .Id }}" method="POST">
+                                <button type="submit" class="button">Supprimer l'utilisateur</button>
+                            </form>
+                            {{ end }}
+                    </div>
+                </article>
+                {{ end }}
+            </div>
+            <div class="espace"></div>
+            <div class="threadB">
+                <strong>Gestion des Catégories</strong>
+                {{ range .Categories }}
+                <div class="message is-dark">
+                    <div class="message-header">
+                        <p>{{ .Name }}</p>
+                        <br>
+                    </div>
+                    <div class="message-body">
+                        <form action="/delete-c/{{ .Id }}">
+                            <button type="submit" class="button"> Supprimer cette catégorie </button>
+                        </form>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+            <div class="espace"></div>
+        </div>
+        <div style="padding-top: 3vh;"></div>
+        <div class="flexThread" style="padding-left: 40%;">
+            <div class="threadP">
+                <strong>Gestion des Requêtes</strong>
+                {{ range .Request}}
+                <article class="message is-dark">
+                    <div class="message-header">
+                        <p>Par <strong>{{ .ModoName }}</strong> le {{ .Date }}</p>
+                    </div>
+                    <div class="message-body">
+                        <p>{{ .Content }}</p>
+                        <form action="/delete-r/{{ .Id }}">
+                            <button type="submit"> Supprimer la requête </button>
+                        </form>
+                    </div>
+                </article>
+                {{ end }}
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+    
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+    
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+    
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    
+    });
+    });
+    }
+    });
+</script>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>^w^</title>
+    <link href="./static/logstyle.css" rel="stylesheet" media="all" type="text/css">
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+        content="432511094599-trua3guhat2lu1hrievpmdrrverpiv5j.apps.googleusercontent.com">
+</head>
+
+<body>
+    <a href="/">TEAMJBZZ</a>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="/register" method="POST">
+                <h1>Créer votre compte</h1>
+                <div class="social-container">
+                    <div class="g-signin2" onclick="ClickRegister()" data-onsuccess="onSignIn">Inscription</div>
+                </div>
+                <input type="text" placeholder="Nom" name="username" required />
+                <input type="email" placeholder="Email" name="email" required />
+                <input type="password" placeholder="Mot de passe" name="password" required />
+                <button>S'inscrire</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="/login" method="POST">
+                <h1>Connexion</h1>
+                <div class="social-container">
+                    <div class="g-signin2" onclick="ClickLogin()" data-onsuccess="onLogin">Connexion</div>
+                </div>
+                <input type="email" placeholder="Email" name="email" required />
+                <input type="password" placeholder="Mot de passe" name="password" required />
+                <button>Connexion</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>TEAM JBZZ</h1>
+                    <p>Pour se connecter c'est par ici</p>
+                    <button class="ghost" id="signIn">Connexion</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Bienvenue</h1>
+                    <p>Pour créer son compte c'est par là</p>
+                    <button class="ghost" id="signUp">S'inscrire</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <form id="registerG" action="/googleRegister" method="POST" name="googleR">
+            <input id="idForm" type="hidden" name="id" value="">
+            <input id="nameForm" type="hidden" name="name" value="">
+            <input id="imageForm" type="hidden" name="image" value="">
+            <input id="emailForm" type="hidden" name="email" value="">
+        </form>
+        <form id="loginG" action="/googleLogin" method="POST" name="googleL">
+            <input id="LidForm" type="hidden" name="id" value="">
+            <input id="LemailForm" type="hidden" name="email" value="">
+        </form>
+    </div>
+</body>
+
+<script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+
+    var clickedL=false;
+    function ClickLogin()
+    {
+        clickedL=true;
+    }
+    var clickedR=false;
+    function ClickRegister()
+    {
+        clickedR=true;
+    }
+
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId());
+        document.getElementById("idForm").value = profile.getId();
+        console.log('Name: ' + profile.getName());
+        document.getElementById("nameForm").value = profile.getName();
+        console.log('Image URL: ' + profile.getImageUrl());
+        document.getElementById("imageForm").value = profile.getImageUrl();
+        console.log('Email: ' + profile.getEmail());
+        document.getElementById("emailForm").value = profile.getEmail();
+        if (clickedR){
+            document.forms["googleR"].submit()
+        }
+    }
+
+    function onLogin(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        document.getElementById("LidForm").value = profile.getId();
+        document.getElementById("LemailForm").value = profile.getEmail();
+        if (clickedL) {
+        document.forms["googleL"].submit()
+        }
+    }
+</script>
+
+</html>

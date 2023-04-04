@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>^w^</title>
+    <link href="./static/style.css" rel="stylesheet" media="all" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+</head>
+
+<body>
+    <nav class="navbar is-dark is-spaced" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+            <strong>TEAMJBZZ</strong>
+            </a>  
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <div style="padding-left: 1vh;">
+                    <input class="input is-dark" style="width: 50vh;" type="text" placeholder="Chercher un thread ou un utilisateur">
+                </div>
+                    <div style="padding-left: 1vh;">
+                        <button class="button is-dark">Chercher</button>
+                    </div>
+                <a href="/poste">
+                <button class="button is-dark">Poster un thread</button>
+                </a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    {{ if eq .Logged false }}
+                    <div class="buttons">
+                        <a class="button is-primary" href="/co">
+                        <strong>Login or Sign up</strong>
+                        </a>
+                    </div>
+                    {{ else }}
+                    <div class="buttons">
+                        <a class="button is-dark" href="/profil/{{ .Username }}">
+                        <strong>Profil</strong>
+                        </a>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="padding-left: 40%; padding-right: 40%; padding-top: 10%;">
+        <div class="content">
+            Attention si vous cliqué sur le bouton vous serez automatiquement prélevé de 1000 balles 
+        </div>
+        <form action="/vip" method="POST">
+            <button type="submit" class="button">Payer 1000 balles</button>
+            <input name="username" type="hidden" value={{ .Username }}
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>
